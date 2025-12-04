@@ -24,23 +24,24 @@ jobs:
         pip install pystray pillow playsound opencv-python
 
     - name: Build with PyInstaller
+      shell: cmd
       run: |
         pyinstaller --noconfirm ^
-          --onefile ^
-          --windowed ^
-          --add-data "alert.mp3;." ^
-          --hidden-import=wmi ^
-          --hidden-import=win32com ^
-          --hidden-import=pythoncom ^
-          --hidden-import=pystray ^
-          --hidden-import=PIL ^
-          --hidden-import=PIL._tkinter_finder ^
-          --hidden-import=playsound ^
-          --hidden-import=cv2 ^
-          --collect-all wmi ^
-          --collect-all pystray ^
-          --collect-all PIL ^
-          camera_monitor.py
+        --onefile ^
+        --windowed ^
+        --add-data "alert.mp3;." ^
+        --hidden-import=wmi ^
+        --hidden-import=win32com ^
+        --hidden-import=pythoncom ^
+        --hidden-import=pystray ^
+        --hidden-import=PIL ^
+        --hidden-import=PIL._tkinter_finder ^
+        --hidden-import=playsound ^
+        --hidden-import=cv2 ^
+        --collect-all wmi ^
+        --collect-all pystray ^
+        --collect-all PIL ^
+        camera_monitor.py
 
     - name: Upload EXE
       uses: actions/upload-artifact@v4
