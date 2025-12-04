@@ -1,0 +1,35 @@
+name: Build Windows EXE
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        pip install pyinstaller playsound pystray pillow wmi pypiwin32 
+
+    - name: Copy alert.mp3
+      run: |
+        echo [ERROR] Please upload your own alert.mp3 >> alert.mp3
+
+    - name: Build EXE
+      run: |
+        pyinstaller --onefile --noconsole camera_monitor.py
+
+    - name: Upload EXE
+      uses: actions/upload-artifact@v3
+      with:
+        name: CameraMonitor
+        path: dist/camera_monitor.exe
