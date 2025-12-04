@@ -46,6 +46,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: CameraMonitorEXE
-        path: dist/*.exe      with:
-        name: Camera-Monitor-EXE
         path: dist/*.exe
